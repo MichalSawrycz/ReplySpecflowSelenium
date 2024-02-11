@@ -1,31 +1,43 @@
 ﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
+using OpenQA.Selenium.Chrome;
 
 namespace ReplyRecruitmentTask.PageObjects
 {
-    public class LoginPage
+    public class LoginPage : PageObjectBase
     {
         IWebDriver driver;
-        public LoginPage(IWebDriver driver)
+        public LoginPage() : base()
         {
-            this.driver = driver;
-            PageFactory.InitElements(driver, this);
+            this.driver = new ChromeDriver();
         }
 
-        [FindsBy(How = How.Id, Using = "login_user")]
-        private IWebElement LoginUserNameInput;
+        #region WebElements
+        public IWebElement UserNameInput => driver.FindElement(By.Id("login_user"));
+        public IWebElement UserPasswordInput => driver.FindElement(By.Id("login_pass"));
+        public IWebElement LoginBtn => driver.FindElement(By.Id("login_button"));
+        public IWebElement UserToolsBtn => driver.FindElement(By.Id("module-tools"));
 
-        [FindsBy(How = How.Id, Using = "login_pass")]
-        private IWebElement LoginUserPasswordInput;
+        #endregion WebElements
 
-        [FindsBy(How = How.Id, Using = "login_button")]
-        private IWebElement LoginUserButton;
-
-        private void performLoginAction()
+        public LoginPage NavigateTo()
         {
-            LoginUserNameInput.SendKeys("admin");
-            LoginUserPasswordInput.SendKeys("admin");
-            LoginUserButton.Click();
+            driver.Navigate().GoToUrl("https://demo.1crmcloud.com/login.php?login_module=Home&login_action=index");
+            return this;
+        }
+
+        public LoginPage performLoginAction()
+        {
+            UserNameInput.SendKeys("admin");
+            UserPasswordInput.SendKeys("admin");
+            LoginBtn.Click();
+            return this;
+        }
+
+        public bool VerifyIfUserIsLogged()
+        {
+            Thread.Sleep(10000);
+            bool AreUserToolsDisplayed = UserToolsBtn.Displayed; 
+            return AreUserToolsDisplayed; 
         }
     }
 }
