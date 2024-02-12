@@ -1,29 +1,52 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 namespace ReplyRecruitmentTask.PageObjects
 {
     public class HomePage : PageObjectBase
     {
-        IWebDriver driver;
         public HomePage() : base()
         {
-            this.driver = new ChromeDriver();
         }
 
         #region WebElements
-        IWebElement SalesAndMarkietingSectionBtn => driver.FindElement(By.CssSelector("li[data-tab-id='LBL_TABGROUP_SALES_MARKETING']"));
+        IWebElement SalesAndMarkietingSectionBtn => driver.FindElement(By.Id("grouptab-1"));
+        IWebElement SalesAndMarkietingContactSectionBtn => driver.FindElement(By.XPath("//a[contains(@href, 'Contacts')]"));
+        IWebElement ReportsAndSettingsSectionBtn => driver.FindElement(By.XPath("//a[contains(@href, 'Reports')]"));
 
         #endregion WebElements
 
-        #region methods
-        public SalesAndMarketingPage GoToSalesAndMarketingPage()
+        #region Methods
+        public void GoToSalesAndMarketingContactPage()
         {
-            Thread.Sleep(10000);
-            SalesAndMarkietingSectionBtn.Click();
-            return new SalesAndMarketingPage();
+            
+            Actions action = new Actions(driver);
+
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("grouptab-1")));
+
+            action.MoveToElement(SalesAndMarkietingSectionBtn).Perform();
+
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[contains(@href, 'Contacts')]")));
+            SalesAndMarkietingContactSectionBtn.Click();
         }
-        #endregion methods
+        public void GoToReportsAndSettingsPage()
+        {
+
+            Actions action = new Actions(driver);
+
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("grouptab-5")));
+
+            action.MoveToElement(ReportsAndSettingsSectionBtn).Perform();
+
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[contains(@href, 'Reports')]")));
+            ReportsAndSettingsSectionBtn.Click();
+        }
+        #endregion Methods
 
 
     }

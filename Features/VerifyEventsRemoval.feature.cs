@@ -104,10 +104,10 @@ this.ScenarioInitialize(scenarioInfo);
     testRunner.Given("I am logged in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 5
-    testRunner.When("I navigate to \"Reports & Settings\" -> \"Reports\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.When("User navigate to Reports and Settings section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 6
-    testRunner.And("I find \"Project Profitability\" report", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("I find Project Profitability report", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 7
     testRunner.Then("I run the report and verify results were returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

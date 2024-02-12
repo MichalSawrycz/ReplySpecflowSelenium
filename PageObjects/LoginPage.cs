@@ -1,14 +1,14 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 namespace ReplyRecruitmentTask.PageObjects
 {
     public class LoginPage : PageObjectBase
     {
-        IWebDriver driver;
         public LoginPage() : base()
         {
-            this.driver = new ChromeDriver();
         }
 
         #region WebElements
@@ -19,6 +19,7 @@ namespace ReplyRecruitmentTask.PageObjects
 
         #endregion WebElements
 
+        #region Methods
         public LoginPage NavigateTo()
         {
             driver.Navigate().GoToUrl("https://demo.1crmcloud.com/login.php?login_module=Home&login_action=index");
@@ -35,9 +36,11 @@ namespace ReplyRecruitmentTask.PageObjects
 
         public bool VerifyIfUserIsLogged()
         {
-            Thread.Sleep(10000);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("module-tools")));
             bool AreUserToolsDisplayed = UserToolsBtn.Displayed; 
             return AreUserToolsDisplayed; 
         }
+        #endregion Methods
     }
 }

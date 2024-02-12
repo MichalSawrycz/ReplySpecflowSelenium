@@ -106,20 +106,10 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
     testRunner.When("User navigate to Contracts tab in Sales & Marketing section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "FirstName",
-                            "LastName",
-                            "Role",
-                            "Categories"});
-                table1.AddRow(new string[] {
-                            "John",
-                            "Doe",
-                            "Developer",
-                            "Customers, Suppliers"});
 #line 6
-    testRunner.And("I create a new contact with details:", ((string)(null)), table1, "And ");
+    testRunner.And("I create a new contact", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 9
+#line 7
     testRunner.Then("I open the created contact and verify its data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

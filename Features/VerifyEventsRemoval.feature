@@ -2,6 +2,6 @@
 
 Scenario: Run report
     Given I am logged in
-    When I navigate to "Reports & Settings" -> "Reports"
-    And I find "Project Profitability" report
+    When User navigate to Reports and Settings section
+    And I find Project Profitability report
     Then I run the report and verify results were returned

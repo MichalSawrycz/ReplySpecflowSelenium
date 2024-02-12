@@ -21,12 +21,20 @@ public class LoginSteps
     public void WhenUserEntersValidCredentials()
     {
         var homePage = new HomePage();
-        homePage.GoToSalesAndMarketingPage();
+        homePage.GoToSalesAndMarketingContactPage();
     }
 
-    [Then("U¿ytkownik jest zalogowany")]
-    public void ThenUserIsLoggedIn()
+    [When(@"I create a new contact")]
+    public void CreateNewContact()
     {
-        
+        var SalesAndMarketingContactPage = new SalesAndMarketingContactPage();
+        SalesAndMarketingContactPage.CreateNewContact();
+    }
+
+    [Then(@"I open the created contact and verify its data")]
+    public void VerifyCreatedContact()
+    {
+        var SalesAndMarketingContactPage = new SalesAndMarketingContactPage();
+        SalesAndMarketingContactPage.VerifyCreatedContact();
     }
 }

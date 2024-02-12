@@ -5,7 +5,7 @@ public class WebDriverManager
 {
     private static IWebDriver _driver;
 
-    public static IWebDriver Driver
+    public static IWebDriver driver
     {
         get
         {

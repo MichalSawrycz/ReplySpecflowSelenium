@@ -2,10 +2,12 @@
 
 public class PageObjectBase
 {
-    protected IWebDriver Driver;
+    protected IWebDriver driver;
+    protected By mainLocator;
 
     public PageObjectBase()
     {
-        Driver = WebDriverManager.Driver;
+        driver = WebDriverManager.driver;
+        driver.Manage().Window.Maximize();
     }
 }
