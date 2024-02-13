@@ -4,12 +4,14 @@ using SeleniumExtras.WaitHelpers;
 using ReplyRecruitmentTask.Assets;
 using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
+using OpenQA.Selenium.Chrome;
+using AngleSharp.Text;
 
 namespace ReplyRecruitmentTask.PageObjects
 {
-    public class SalesAndMarketingContactPage : PageObjectBase
+    public class SalesAndMarketingPage : PageObjectBase
     {
-        public SalesAndMarketingContactPage() : base()
+        public SalesAndMarketingPage() : base()
         {
         }
 
@@ -18,8 +20,9 @@ namespace ReplyRecruitmentTask.PageObjects
        
         IWebElement FirstNameInput => driver.FindElement(By.Name("first_name"));
         IWebElement LastNameInput => driver.FindElement(By.Name("last_name"));
+        IList<IWebElement> CheckboxesOnSite => driver.FindElements(By.XPath("//table/tbody/tr"));
 
-        
+
         #endregion WebElements
 
         #region Methods
@@ -64,11 +67,41 @@ namespace ReplyRecruitmentTask.PageObjects
 
         public void VerifyCreatedContact()
         {
+            Thread.Sleep(1000);
             driver.Wait().Visible(By.XPath("//a[contains(text(), 'John Doe')]"));
             driver.FindElement(By.XPath("//a[contains(text(), 'John Doe')]")).Click();
             Thread.Sleep(2000);
             string liText = driver.FindElement(By.XPath("(//ul[contains(@class, 'summary-list')])[2]/li[1]")).Text;
             Assert.AreEqual("Category\r\nCustomers, Suppliers", liText);
+        }
+
+        public void SelectCheckboxes(int numberOfCheckboxes)
+        {
+            Thread.Sleep(1000);
+            driver.FindElement(By.XPath("//table/tbody/tr[1]")).Click();
+            Thread.Sleep(1000);
+            driver.FindElement(By.XPath("//table/tbody/tr[2]")).Click();
+            Thread.Sleep(1000);
+            driver.FindElement(By.XPath("//table/tbody/tr[3]")).Click();
+        }
+
+        public void DeleteCheckboxes()
+        {
+            string CheckBoxes1 = driver.FindElement(By.CssSelector("div.listview-status > span:nth-of-type(2)")).Text;
+            int CheckBoxes1Int = int.Parse(CheckBoxes1);
+            Thread.Sleep(1000);
+            driver.FindElement(By.CssSelector("[id*='ActionButtonHead']")).Click();
+            Thread.Sleep(200);
+            driver.FindElement(By.XPath("//div[contains(@class,'option-cell') and text()='Delete']")).Click();
+            Thread.Sleep(1000);
+            IAlert alert = driver.SwitchTo().Alert();
+            alert.Accept();
+
+            Thread.Sleep(5000);
+            string CheckBoxes2 = driver.FindElement(By.CssSelector("div.listview-status > span:nth-of-type(2)")).Text;
+            int CheckBoxes2Int = int.Parse(CheckBoxes2);
+
+            Assert.Less(CheckBoxes2Int, CheckBoxes1Int);
         }
     }
 }

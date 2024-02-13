@@ -1,13 +1,11 @@
 ﻿using ReplyRecruitmentTask.PageObjects;
-using System;
-using TechTalk.SpecFlow;
 
 namespace ReplyRecruitmentTask.StepDefinitions
 {
     [Binding]
-    public class VerifyEventsRemovalSteps
+    public class VerifyReportsRunSteps
     {
-        [Given(@"I am logged in")]
+        [Given(@"User has completed login")]
         public void GivenUserIsOnLoginPage()
         {
             var loginPage = new LoginPage();

@@ -1,5 +1,3 @@
-using NUnit.Framework;
-using OpenQA.Selenium;
 using ReplyRecruitmentTask.PageObjects;
 
 
@@ -8,7 +6,7 @@ namespace ReplyRecruitmentTask;
 [Binding]
 public class LoginSteps
 {
-    [Given("User is logged in")]
+    [Given("User is logged into app")]
     public void GivenUserIsOnLoginPage()
     {
         var loginPage = new LoginPage();
@@ -27,14 +25,14 @@ public class LoginSteps
     [When(@"I create a new contact")]
     public void CreateNewContact()
     {
-        var SalesAndMarketingContactPage = new SalesAndMarketingContactPage();
+        var SalesAndMarketingContactPage = new SalesAndMarketingPage();
         SalesAndMarketingContactPage.CreateNewContact();
     }
 
     [Then(@"I open the created contact and verify its data")]
     public void VerifyCreatedContact()
     {
-        var SalesAndMarketingContactPage = new SalesAndMarketingContactPage();
+        var SalesAndMarketingContactPage = new SalesAndMarketingPage();
         SalesAndMarketingContactPage.VerifyCreatedContact();
     }
 }

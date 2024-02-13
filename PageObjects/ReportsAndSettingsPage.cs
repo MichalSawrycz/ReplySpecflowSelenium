@@ -38,7 +38,7 @@ namespace ReplyRecruitmentTask.PageObjects
             Thread.Sleep(5000);
             RunReportBtn.Click();
             Thread.Sleep(5000);
-            bool IsRaportResultsVisibler = driver.FindElement(By.XPath("//*[contains(text(), '2 Tall Stores')]")).Displayed;
+            bool IsRaportResultsVisibler = driver.FindElement(By.XPath("//*[contains(text(), 'Starting Soon')]")).Displayed;
             Assert.IsTrue(IsRaportResultsVisibler);
         }
         #endregion Methods

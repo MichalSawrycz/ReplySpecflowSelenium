@@ -1,7 +1,7 @@
-﻿Feature: Testing process of event removal
+﻿Feature: Testing process of raport run
 
-Scenario: Run report
-    Given I am logged in
-    When User navigate to Reports and Settings section
-    And I find Project Profitability report
-    Then I run the report and verify results were returned
+Scenario: Remove events from activity log
+    Given User is login into app
+    When I navigate to Reports & Settings
+    And I select the first 3 items in the table
+    Then I click Actions Amd Delete and verify if items were removed
