@@ -52,14 +52,10 @@ namespace ReplyRecruitmentTask.PageObjects
             driver.Wait().Visible(By.XPath("//*[contains(text(), 'Suppliers')]"));
             Thread.Sleep(1000);
             driver.FindElement(By.XPath("//*[contains(text(), 'Suppliers')]")).Click();
-            //driver.Wait().Clickable(By.Id("DetailFormbusiness_role-input"));
-            //driver.FindElement(By.Id("DetailFormbusiness_role-input")).Click();
-            //driver.FindElement(By.Id("DetailFormbusiness_role-input")).Click();
-            //Actions action = new Actions(driver);
-            //action.MoveToElement(driver.FindElement(By.Id("DetailFormbusiness_role-input"))).ClickAndHold();
-            //Thread.Sleep(5000);
-            //driver.Wait().Visible(By.XPath("//*[contains(text(), 'CEO')]"));
-            //driver.FindElement(By.XPath("//*[contains(text(), 'CEO')]")).Click();
+            driver.Wait().Clickable(By.Id("DetailFormbusiness_role-input"));
+            driver.FindElement(By.Id("DetailFormbusiness_role-input")).Click();
+            Thread.Sleep(200);
+            driver.FindElement(By.XPath("//div[contains(@class,'option-cell') and text()='MIS']")).Click();
             Thread.Sleep(1000);
             driver.FindElement(By.Id("DetailForm_save")).Click();
 
