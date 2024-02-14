@@ -1,4 +1,5 @@
 ﻿using ReplyRecruitmentTask.PageObjects;
+using AventStack.ExtentReports;
 
 namespace ReplyRecruitmentTask.StepDefinitions
 {
