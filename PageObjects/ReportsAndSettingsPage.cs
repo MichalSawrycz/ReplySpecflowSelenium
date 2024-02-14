@@ -18,27 +18,30 @@ namespace ReplyRecruitmentTask.PageObjects
         IWebElement SearchResult => driver.FindElement(By.ClassName("listViewNameLink"));
         IWebElement RunReportBtn => driver.FindElement(By.Name("FilterForm_applyButton"));
 
-
+        string ReportsAndSettingsSearchInputSelector = "filter_text";
+        string StartingSoonReportResult = "//*[contains(text(), 'Starting Soon')]";
 
         #endregion WebElements
+
+        string ItemName = "Project Profitability";
 
         #region Methods
         public void SearchReport()
         {
-            driver.Wait().Visible(By.Id("filter_text"));
-            ReportsAndSettingsSearchInput.SendKeys("Project Profitability");
-            Thread.Sleep(5000);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.Wait().Visible(By.Id(ReportsAndSettingsSearchInputSelector));
+            ReportsAndSettingsSearchInput.SendKeys(ItemName);
+            Thread.Sleep(500);
             ReportsAndSettingsSearchInput.SendKeys(Keys.Enter);
-            Thread.Sleep(5000);
+            Thread.Sleep(1000);
             SearchResult.Click();
         }
 
         public void RunAndVerifyRaport()
         {
-            Thread.Sleep(5000);
+            Thread.Sleep(1000);
             RunReportBtn.Click();
-            Thread.Sleep(5000);
-            bool IsRaportResultsVisibler = driver.FindElement(By.XPath("//*[contains(text(), 'Starting Soon')]")).Displayed;
+            bool IsRaportResultsVisibler = driver.FindElement(By.XPath(StartingSoonReportResult)).Displayed;
             Assert.IsTrue(IsRaportResultsVisibler);
         }
         #endregion Methods

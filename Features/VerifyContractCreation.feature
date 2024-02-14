@@ -3,6 +3,6 @@
 Scenario: Create contact
     Given User is logged into app
     When User navigate to Contracts tab in Sales & Marketing section
-    And I create a new contact
-    Then I open the created contact and verify its data
+    And User create a new contact
+    Then User open the created contact and verify its data
 

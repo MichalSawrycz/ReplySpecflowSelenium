@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
@@ -17,19 +16,21 @@ namespace ReplyRecruitmentTask.PageObjects
         public IWebElement LoginBtn => driver.FindElement(By.Id("login_button"));
         public IWebElement UserToolsBtn => driver.FindElement(By.Id("module-tools"));
 
+        string ElementVisibleAfterLoginSelector = "module-tools";
+
         #endregion WebElements
 
         #region Methods
         public LoginPage NavigateTo()
         {
-            driver.Navigate().GoToUrl("https://demo.1crmcloud.com/login.php?login_module=Home&login_action=index");
+            driver.Navigate().GoToUrl(URL);
             return this;
         }
 
         public LoginPage performLoginAction()
         {
-            UserNameInput.SendKeys("admin");
-            UserPasswordInput.SendKeys("admin");
+            UserNameInput.SendKeys(Login);
+            UserPasswordInput.SendKeys(Password);
             LoginBtn.Click();
             return this;
         }
@@ -37,7 +38,7 @@ namespace ReplyRecruitmentTask.PageObjects
         public bool VerifyIfUserIsLogged()
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("module-tools")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id(ElementVisibleAfterLoginSelector)));
             bool AreUserToolsDisplayed = UserToolsBtn.Displayed; 
             return AreUserToolsDisplayed; 
         }
